@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Let's create a file for JSON objects array demo: -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Objects Array Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #userList {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JSON Objects Array Demo</h1>
+
+    <div class="controls">
+        <button onclick="displayUsers()">Display Users</button>
+        <button onclick="addUser()">Add Random User</button>
+        <button onclick="sortByAge()">Sort by Age</button>
+        <button onclick="filterAdults()">Show Adults Only</button>
+    </div>
+
+    <div id="userList"></div>
+
+    <script>
+        // Sample JSON array of user objects
+        let users = [
+            {
+                id: 1,
+                name: "John Doe",
+                age: 28,
+                email: "john@example.com",
+                hobbies: ["reading", "gaming"]
+            },
+            {
+                id: 2,
+                name: "Jane Smith",
+                age: 24,
+                email: "jane@example.com",
+                hobbies: ["painting", "music"]
+            },
+            {
+                id: 3,
+                name: "Bob Wilson",
+                age: 32,
+                email: "bob@example.com",
+                hobbies: ["sports", "cooking"]
+            }
+        ];
+
+        // Function to display users
+        function displayUsers(userArray = users) {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+
+            userArray.forEach(user => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${user.name}</h3>
+                    <p><strong>ID:</strong> ${user.id}</p>
+                    <p><strong>Age:</strong> ${user.age}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>Hobbies:</strong> ${user.hobbies.join(', ')}</p>
+                `;
+                userList.appendChild(card);
+            });
+        }
+
+        // Function to add a random user
+        function addUser() {
+            const names = ["Alice Brown", "Charlie Davis", "Diana Evans", "Edward Fox"];
+            const hobbies = [
+                ["traveling", "photography"],
+                ["dancing", "singing"],
+                ["writing", "hiking"],
+                ["swimming", "cycling"]
+            ];
+
+            const newUser = {
+                id: users.length + 1,
+                name: names[Math.floor(Math.random() * names.length)],
+                age: Math.floor(Math.random() * 30) + 20,
+                email: `user${users.length + 1}@example.com`,
+                hobbies: hobbies[Math.floor(Math.random() * hobbies.length)]
+            };
+
+            users.push(newUser);
+            displayUsers();
+        }
+
+        // Function to sort users by age
+        function sortByAge() {
+            const sortedUsers = [...users].sort((a, b) => a.age - b.age);
+            displayUsers(sortedUsers);
+        }
+
+        // Function to filter adult users (age >= 25)
+        function filterAdults() {
+            const adultUsers = users.filter(user => user.age >= 25);
+            displayUsers(adultUsers);
+        }
+
+        // Initial display
+        displayUsers();
+    </script>
+</body>
+
+</html>

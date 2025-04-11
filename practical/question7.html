@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Let's create a file for jQuery on() method demonstration: -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery on() Method Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .demo-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .highlight {
+            background-color: #ffeb3b;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .event-log {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .dynamic-element {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>jQuery on() Method Examples</h1>
+
+    <div class="demo-box">
+        <h3>1. Basic Event Handling</h3>
+        <button id="clickButton">Click Me</button>
+        <button id="hoverButton">Hover Me</button>
+    </div>
+
+    <div class="demo-box">
+        <h3>2. Multiple Events</h3>
+        <div id="multiEventDemo" style="padding: 20px; background-color: #f0f0f0;">
+            Click or move your mouse over this area
+        </div>
+    </div>
+
+    <div class="demo-box">
+        <h3>3. Dynamic Elements</h3>
+        <button id="addElement">Add New Element</button>
+        <div id="dynamicContainer"></div>
+    </div>
+
+    <div class="demo-box">
+        <h3>4. Event Delegation</h3>
+        <ul id="delegationList">
+            <li>List Item 1</li>
+            <li>List Item 2</li>
+            <li>List Item 3</li>
+        </ul>
+        <button id="addListItem">Add List Item</button>
+    </div>
+
+    <div class="event-log">
+        <h3>Event Log:</h3>
+        <div id="eventLog"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Helper function to log events
+            function logEvent(message) {
+                $('#eventLog').prepend(`<p>${new Date().toLocaleTimeString()}: ${message}</p>`);
+            }
+
+            // 1. Basic Event Handling
+            $('#clickButton').on('click', function () {
+                logEvent('Click button was clicked');
+                $(this).toggleClass('highlight');
+            });
+
+            $('#hoverButton').on('mouseenter mouseleave', function (event) {
+                logEvent(`Hover button ${event.type}`);
+                $(this).toggleClass('highlight');
+            });
+
+            // 2. Multiple Events
+            $('#multiEventDemo').on({
+                click: function () {
+                    logEvent('Multi-event area was clicked');
+                    $(this).css('background-color', '#e0e0e0');
+                },
+                mouseenter: function () {
+                    logEvent('Mouse entered multi-event area');
+                    $(this).css('background-color', '#b3e5fc');
+                },
+                mouseleave: function () {
+                    logEvent('Mouse left multi-event area');
+                    $(this).css('background-color', '#f0f0f0');
+                }
+            });
+
+            // 3. Dynamic Elements
+            let elementCount = 0;
+            $('#addElement').on('click', function () {
+                elementCount++;
+                const newElement = $(`<div class="dynamic-element">
+                    Dynamic Element ${elementCount}
+                    <button class="remove-btn">Remove</button>
+                </div>`);
+                $('#dynamicContainer').append(newElement);
+                logEvent(`Dynamic element ${elementCount} added`);
+            });
+
+            // Event delegation for dynamic elements
+            $('#dynamicContainer').on('click', '.remove-btn', function () {
+                const element = $(this).parent();
+                element.fadeOut(300, function () {
+                    element.remove();
+                });
+                logEvent('Dynamic element removed');
+            });
+
+            // 4. Event Delegation
+            let listItemCount = 3;
+            $('#addListItem').on('click', function () {
+                listItemCount++;
+                $('#delegationList').append(`<li>List Item ${listItemCount}</li>`);
+                logEvent(`New list item ${listItemCount} added`);
+            });
+
+            $('#delegationList').on('click', 'li', function () {
+                $(this).toggleClass('highlight');
+                logEvent(`List item "${$(this).text()}" clicked`);
+            });
+        });
+    </script>
+</body>
+
+</html>
