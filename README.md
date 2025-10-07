@@ -1,3 +1,91 @@
+Here are **Python programs** for all the **Question 1 (13 marks)** tasks 👇
+
+---
+
+### **1️⃣ Fibonacci Series**
+
+```python
+n = int(input("Enter number of terms: "))
+a, b = 0, 1
+for i in range(n):
+    print(a, end=" ")
+    a, b = b, a + b
+```
+
+---
+
+### **2️⃣ Sum of Digits**
+
+```python
+num = int(input("Enter a number: "))
+sum_digits = 0
+while num > 0:
+    sum_digits += num % 10
+    num //= 10
+print("Sum of digits:", sum_digits)
+```
+
+---
+
+### **3️⃣ Recursive Factorial**
+
+```python
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * factorial(n - 1)
+
+n = int(input("Enter a number: "))
+print("Factorial:", factorial(n))
+```
+
+---
+
+### **4️⃣ Compare Two Dates**
+
+```python
+d1 = list(map(int, input("Enter first date (DD/MM/YYYY): ").split('/')))
+d2 = list(map(int, input("Enter second date (DD/MM/YYYY): ").split('/')))
+
+if d1[2:] + d1[1:2] + d1[:1] < d2[2:] + d2[1:2] + d2[:1]:
+    print("First date is earlier")
+elif d1 == d2:
+    print("Both dates are same")
+else:
+    print("Second date is earlier")
+```
+
+---
+
+### **5️⃣ Array Operations, Indexing & Slicing**
+
+```python
+import array as arr
+
+a = arr.array('i', [10, 20, 30, 40, 50])
+print("Array:", a.tolist())
+print("First element:", a[0])
+print("Last element:", a[-1])
+print("Sliced array (2nd to 4th):", a[1:4].tolist())
+```
+
+---
+
+### **6️⃣ Count Characters and Words**
+
+```python
+text = input("Enter a string: ")
+chars = len(text)
+words = len(text.split())
+print("Characters:", chars)
+print("Words:", words)
+```
+
+---
+
+Would you like me to give the **Question 2 programs (12 marks)** also in Python next?
+
+
 Perfect 👍 Here are **short exam-style (8–10 lines)** C++ versions of all **Question 2 (12 marks)** programs — clean and concise, ideal for quick writing in exams 👇
 
 ---
