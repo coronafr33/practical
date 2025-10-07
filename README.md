@@ -186,3 +186,151 @@ int main(){Node* r=NULL;int n,v;cin>>n;while(n--){cin>>v;r=ins(r,v);}in(r);}
 ---
 
 Would you like me to make **short versions (8–10 lines)** of the **Question 1 (Python)** programs too for exam use?
+
+### **Long code of dsa
+Here are **C++ short programs** for all the **Question 2 (12 Marks each)** 👇
+
+---
+
+### **1️⃣ Basic Array Operations — Insert Element**
+
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int arr[100], n, pos, val;
+    cout << "Enter size: ";
+    cin >> n;
+    cout << "Enter elements: ";
+    for(int i=0;i<n;i++) cin >> arr[i];
+    cout << "Enter position and value: ";
+    cin >> pos >> val;
+    for(int i=n;i>=pos;i--) arr[i]=arr[i-1];
+    arr[pos-1]=val;
+    n++;
+    cout << "Array after insertion: ";
+    for(int i=0;i<n;i++) cout << arr[i] << " ";
+}
+```
+
+---
+
+### **2️⃣ Stack using Array**
+
+```cpp
+#include <iostream>
+using namespace std;
+#define SIZE 5
+int stack[SIZE], top = -1;
+
+void push(int val) {
+    if(top == SIZE-1) cout << "Stack Overflow\n";
+    else stack[++top] = val;
+}
+void pop() {
+    if(top == -1) cout << "Stack Underflow\n";
+    else cout << "Popped: " << stack[top--] << endl;
+}
+void display() {
+    if(top == -1) cout << "Stack Empty\n";
+    else for(int i=top;i>=0;i--) cout << stack[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    push(10); push(20); push(30);
+    display();
+    pop();
+    display();
+}
+```
+
+---
+
+### **3️⃣ Singly Linked List (Input from User)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+int main() {
+    Node *head = NULL, *temp, *newNode;
+    int n, val;
+    cout << "Enter number of nodes: ";
+    cin >> n;
+    for(int i=0;i<n;i++) {
+        newNode = new Node;
+        cout << "Enter value: ";
+        cin >> val;
+        newNode->data = val;
+        newNode->next = NULL;
+        if(head == NULL) head = temp = newNode;
+        else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+    cout << "Linked List: ";
+    temp = head;
+    while(temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+}
+```
+
+---
+
+### **4️⃣ Binary Search Tree (BST)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *left, *right;
+};
+
+Node* insert(Node* root, int val) {
+    if(!root) {
+        root = new Node{val, NULL, NULL};
+    } else if(val < root->data)
+        root->left = insert(root->left, val);
+    else
+        root->right = insert(root->right, val);
+    return root;
+}
+
+void inorder(Node* root) {
+    if(root) {
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+
+int main() {
+    Node* root = NULL;
+    int n, val;
+    cout << "Enter number of nodes: ";
+    cin >> n;
+    for(int i=0;i<n;i++) {
+        cin >> val;
+        root = insert(root, val);
+    }
+    cout << "Inorder traversal: ";
+    inorder(root);
+}
+```
+
+---
+
+Would you like me to make **all these programs shorter (exam-style 8–10 lines each)** or keep them detailed for full marks (12-mark answers)?
+
+
