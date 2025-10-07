@@ -1,3 +1,31 @@
+Here you go — I’ve separated all **Question 1s** and **Question 2s** into two clear lists 👇
+
+---
+
+### **List 1: Question 1 (13 Marks each)**
+
+1. Write a program to generate the Fibonacci series.
+2. Write a program to accept a number from the user and display sum of its digits.
+3. Write a recursive function to print the factorial for a given number.
+4. Write a program that compares two dates (in DD/MM/YYYY format) and prints which one is earlier.
+5. Write a program to perform basic operations, indexing and slicing on arrays.
+6. Write a program to compute number of characters and words in a string.
+
+---
+
+### **List 2: Question 2 (12 Marks each)**
+
+1. Write a program to implement basic array operations: Insert an element at a specific position in an array.
+2. Stack Application: Write a program to implement a stack using an array.
+3. Write a program to Create a singly linked list taking input from user.
+4. Write a program to Create a singly linked list taking input from user. *(repeated)*
+5. Write a program to create a binary search tree.
+6. Write a program to implement basic array operations: Insert an element at a specific position in an array. *(repeated)*
+
+---
+
+Would you like me to **remove duplicates** or keep them as-is (since they might be part of different sets)?
+
 Here are **Python programs** for all the **Question 1 (13 marks)** tasks 👇
 
 ---
