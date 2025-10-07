@@ -218,27 +218,7 @@ libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.10"
 
 ---
 
-#### 9. Handle Missing Values (Replace with Column Mean)
 
-```scala
-import com.github.tototoshi.csv._
-import java.io.File
-import breeze.stats._
-
-object HandleMissing {
-  def main(args: Array[String]): Unit = {
-    val reader = CSVReader.open(new File("data.csv"))
-    val data = reader.allWithHeaders()
-    reader.close()
-
-    val column = data.map(_("value")).map(v => if (v.isEmpty) None else Some(v.toDouble))
-    val meanVal = mean(column.flatten)
-
-    val filled = column.map(_.getOrElse(meanVal))
-    println("Replaced Column = " + filled.mkString(", "))
-  }
-}
-```
 
 ---
 
@@ -277,112 +257,10 @@ sbt update
 sbt compile
 ```
 
----
 
-### ✅ Now, Part 3 (Q10 – Q16)
 
-#### 10. Filter Rows in Dataset
 
-```scala
-import com.github.tototoshi.csv._
-import java.io.File
 
-object FilterRows {
-  def main(args: Array[String]): Unit = {
-    val reader = CSVReader.open(new File("data.csv"))
-    val data = reader.allWithHeaders()
-    reader.close()
-
-    val threshold = 50.0
-    val filtered = data.filter(row => row("value").toDouble > threshold)
-
-    println("Filtered Rows:")
-    filtered.foreach(println)
-  }
-}
-```
-
----
-
-#### 11. Tokenize & Count Word Frequency
-
-```scala
-import scala.io.Source
-
-object WordCount {
-  def main(args: Array[String]): Unit = {
-    val text = Source.fromFile("text.txt").getLines().mkString(" ")
-    val tokens = text.toLowerCase.split("\\W+").filter(_.nonEmpty)
-
-    val freq = tokens.groupBy(identity).mapValues(_.size)
-    freq.foreach { case (word, count) => println(s"$word -> $count") }
-  }
-}
-```
-
----
-
-#### 12. One-Hot Encoding for Categorical Column
-
-```scala
-object OneHotEncoding {
-  def main(args: Array[String]): Unit = {
-    val categories = List("Red", "Blue", "Green", "Blue", "Red")
-    val unique = categories.distinct
-
-    val oneHot = categories.map(cat => unique.map(u => if (u == cat) 1 else 0))
-    println("One-Hot Encoded:")
-    oneHot.foreach(row => println(row.mkString(", ")))
-  }
-}
-```
-
----
-
-#### 13. Scatter Plot (Breeze-viz)
-
-```scala
-import breeze.plot._
-import breeze.linalg._
-
-object ScatterPlotExample {
-  def main(args: Array[String]): Unit = {
-    val f = Figure()
-    val p = f.subplot(0)
-
-    val x = DenseVector.rand 
-    val y = DenseVector.rand 
-
-    p += plot(x, y, '+', colorcode = "blue") // scatter with +
-    p.xlabel = "X Axis"
-    p.ylabel = "Y Axis"
-    f.refresh()
-  }
-}
-```
-
----
-
-#### 14. Histogram
-
-```scala
-import breeze.plot._
-import breeze.stats.distributions._
-
-object HistogramExample {
-  def main(args: Array[String]): Unit = {
-    val data = Gaussian(0,1).sample(1000)  // random normal data
-    val f = Figure()
-    val p = f.subplot(0)
-
-    p += hist(data, bins = 20, colorcode = "green")
-    p.title = "Histogram"
-    f.refresh()
-  }
-}
-```
-
----
 
 #### 15. Line Graph
 
@@ -407,33 +285,4 @@ object LineGraphExample {
 ```
 
 ---
-
-#### 16. Combine Scatter + Line in Single Plot
-
-```scala
-import breeze.plot._
-import breeze.linalg._
-
-object CombinedPlot {
-  def main(args: Array[String]): Unit = {
-    val x = DenseVector.rangeD(0, 10, 1.0)
-    val yLine = x.map(math.sin)
-    val yScatter = DenseVector.rand 
-
-    val f = Figure()
-    val p = f.subplot(0)
-
-    p += plot(x, yLine, '-', colorcode = "red")     // line
-    p += plot(x, yScatter, '+', colorcode = "blue") // scatter
-    p.title = "Combined Plot"
-    f.refresh()
-  }
-}
-```
-
----
-
-✨ That covers **all 17 questions (Q0–Q16)** with ready-to-run **Scala + Breeze + CSV + Viz** code.
-
-Would you like me to now prepare a **single GitHub-ready project structure** (with `src/main/scala/` and all codes separated by file name) so you can directly run each practical from SBT?
 
